@@ -4,18 +4,19 @@ import { gql } from 'apollo-boost';
 
 import Header from './header.component';
 
-const GET_CART_HIDDEN = gql`
-    {
-        cartHidden @client
-    }
+const GET_CLIENT_PROPERTIES = gql`
+  {
+    cartHidden @client
+    currentUser @client
+  }
 `;
 
-const HeaderContainer = (GET_CART_HIDDEN) => (
-    <Query query={GET_CART_HIDDEN}>
-        {
-            ({data: { cartHidden }}) => <Header hidden={cartHidden} />
-        }
-    </Query>
+const HeaderContainer = () => (
+  <Query query={GET_CLIENT_PROPERTIES}>
+    {({ data: { cartHidden, currentUser } }) => (
+      <Header hidden={cartHidden} currentUser={currentUser} />
+    )}
+  </Query>
 );
 
 export default HeaderContainer;

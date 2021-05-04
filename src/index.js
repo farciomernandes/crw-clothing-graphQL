@@ -13,6 +13,7 @@ import { store, persistor } from './redux/store';
 import './index.css';
 import App from './App';
 import { resolvers, typeDefs } from './graphql/resolvers';
+import { default as data } from './graphql/initial-data';
 
 //This connect with database.
 const httpLink = createHttpLink({
@@ -28,13 +29,8 @@ const client = new ApolloClient({
   typeDefs
 });
 
-//INITIAL_VALUE
-client.writeData({
-  data: {
-    cartHidden: true,
-    cartItems: []
-  }
-})
+//INITIAL_VALUE_IN_APOLLO
+client.writeData({ data })
 
 
 ReactDOM.render(
